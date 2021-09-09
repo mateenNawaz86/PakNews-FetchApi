@@ -29,7 +29,9 @@ const NewsPage = (props) => {
   };
 
   useEffect(() => {
+    document.title = `${capitalizeFun(props.category)} - PakNews`;
     fetchData();
+    //eslint-disable-next-line
   }, []);
 
   const fetchMoreData = async () => {
@@ -48,8 +50,7 @@ const NewsPage = (props) => {
   const capitalizeFun = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
-
-  document.title = `${capitalizeFun(props.category)} - PakNews`;
+  
   return (
     <>
       <h1 className="text-info text-center main__heading">
