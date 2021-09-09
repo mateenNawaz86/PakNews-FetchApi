@@ -4,22 +4,25 @@ import Spinner from "../Spinner/Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const NewsPage = (props) => {
-  let articles = [];
-
-  const [enteredNews, setEnteredNews] = useState(articles);
+  
+  const [articles, setArticles] = useState([]);
   let [totalRes, setTotalRes] = useState(0);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=e6146df6a08249b196a409b6d30e70aa&page=${page}&pageSize=${props.pageSize}`;
+    props.changeProgress(10);
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=8636ac2a9dee4fb5be8f7cebd4ad8f99&page=${page}&pageSize=${props.pageSize}`;
     setLoading(true);
     try {
       let data = await fetch(url);
+      props.changeProgress(30);
       let parsedData = await data.json();
-      setEnteredNews((articles = parsedData.articles));
-      setTotalRes((totalRes = parsedData.totalRes));
+      props.changeProgress(70);
+      setArticles(parsedData.articles);
+      setTotalRes(parsedData.totalRes);
       setLoading(false);
+      props.changeProgress(100);
     } catch (error) {
       console.log(error);
     }
@@ -31,33 +34,37 @@ const NewsPage = (props) => {
 
   const fetchMoreData = async () => {
     setPage(page + 1);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=e6146df6a08249b196a409b6d30e70aa&page=${page}&pageSize=${props.pageSize}`;
-
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=8636ac2a9dee4fb5be8f7cebd4ad8f99&page=${page}&pageSize=${props.pageSize}`;
     try {
       let data = await fetch(url);
       let parsedData = await data.json();
-      setEnteredNews(enteredNews.concat(parsedData.articles));
-      setTotalRes((totalRes = parsedData.totalRes));
+      setArticles(articles.concat(parsedData.articles));
+      setTotalRes(parsedData.totalRes);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const capitalizeFun = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  document.title = `${capitalizeFun(props.category)} - PakNews`;
   return (
     <>
       <h1 className="text-info text-center main__heading">
-        PakNews - Top Headlines
+        PakNews - Top {capitalizeFun(props.category)} Headlines
       </h1>
       {loading && <Spinner />}
       <InfiniteScroll
-        dataLength={enteredNews.length}
+        dataLength={articles.length}
         next={fetchMoreData}
-        hasMore={enteredNews.length !== totalRes}
+        hasMore={articles.length !== totalRes}
         loader={<Spinner />}
       >
         <div className="container my-4">
           <div className="row">
-            {enteredNews.map((items, index) => {
+            {articles.map((items, index) => {
               return (
                 <div className="col-md-4 my-2" key={index}>
                   <NewsItem
