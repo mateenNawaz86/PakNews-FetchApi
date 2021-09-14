@@ -7,10 +7,6 @@ import LoadingBar from "react-top-loading-bar";
 const App = () => {
   const [progress, setProgress] = useState(0);
 
-  const setChangeProgress = (prog) => {
-    setProgress(prog);
-  };
-
   return (
     <>
       <Router>
@@ -20,7 +16,7 @@ const App = () => {
           <Switch>
             <Route exact path="/">
               <NewsPage
-                changeProgress={setChangeProgress}
+                changeProgress={setProgress}
                 key="general"
                 pageSize={15}
                 country="us"
@@ -29,7 +25,7 @@ const App = () => {
             </Route>
             <Route exact path="/business">
               <NewsPage
-                changeProgress={setChangeProgress}
+                changeProgress={setProgress}
                 key="business"
                 pageSize={15}
                 country="us"
@@ -38,7 +34,7 @@ const App = () => {
             </Route>
             <Route exact path="/entertainment">
               <NewsPage
-                changeProgress={setChangeProgress}
+                changeProgress={setProgress}
                 key="entertainment"
                 pageSize={15}
                 country="us"
@@ -47,7 +43,7 @@ const App = () => {
             </Route>
             <Route exact path="/general">
               <NewsPage
-                changeProgress={setChangeProgress}
+                changeProgress={setProgress}
                 key="general"
                 pageSize={15}
                 country="us"
@@ -56,7 +52,7 @@ const App = () => {
             </Route>
             <Route exact path="/health">
               <NewsPage
-                changeProgress={setChangeProgress}
+                changeProgress={setProgress}
                 key="health"
                 pageSize={15}
                 country="us"
@@ -65,7 +61,7 @@ const App = () => {
             </Route>
             <Route exact path="/science">
               <NewsPage
-                changeProgress={setChangeProgress}
+                changeProgress={setProgress}
                 key="science"
                 pageSize={15}
                 country="us"
@@ -74,7 +70,7 @@ const App = () => {
             </Route>
             <Route exact path="/sports">
               <NewsPage
-                changeProgress={setChangeProgress}
+                changeProgress={setProgress}
                 key="sports"
                 pageSize={15}
                 country="us"
@@ -83,7 +79,7 @@ const App = () => {
             </Route>
             <Route exact path="/technology">
               <NewsPage
-                changeProgress={setChangeProgress}
+                changeProgress={setProgress}
                 key="technology"
                 pageSize={15}
                 country="us"

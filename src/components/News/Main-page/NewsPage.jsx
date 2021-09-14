@@ -4,7 +4,6 @@ import Spinner from "../Spinner/Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const NewsPage = (props) => {
-  
   const [articles, setArticles] = useState([]);
   let [totalRes, setTotalRes] = useState(0);
   const [page, setPage] = useState(1);
@@ -29,12 +28,18 @@ const NewsPage = (props) => {
   };
 
   useEffect(() => {
+    document.title = `${capitalizeFun(props.category)} - PakNews`;
     fetchData();
+    //eslint-disable-next-line
   }, []);
 
   const fetchMoreData = async () => {
+    const url = `https://newsapi.org/v2/top-headlines?country=${
+      props.country
+    }&category=${props.category}&apiKey=8636ac2a9dee4fb5be8f7cebd4ad8f99&page=${
+      page + 1
+    }&pageSize=${props.pageSize}`;
     setPage(page + 1);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=8636ac2a9dee4fb5be8f7cebd4ad8f99&page=${page}&pageSize=${props.pageSize}`;
     try {
       let data = await fetch(url);
       let parsedData = await data.json();
@@ -49,7 +54,6 @@ const NewsPage = (props) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  document.title = `${capitalizeFun(props.category)} - PakNews`;
   return (
     <>
       <h1 className="text-info text-center main__heading">
