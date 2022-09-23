@@ -38,7 +38,7 @@ const Navbar = () => {
                   aria-current="page"
                   to="/"
                 >
-                  Home
+                  General
                 </Link>
               </li>
 
@@ -64,17 +64,7 @@ const Navbar = () => {
                   Entertainment
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  className={`nav-link ${
-                    location.pathname === "/general" ? "active" : ""
-                  }`}
-                  aria-current="page"
-                  to="/general"
-                >
-                  General
-                </Link>
-              </li>
+
               <li className="nav-item">
                 <Link
                   className={`nav-link ${

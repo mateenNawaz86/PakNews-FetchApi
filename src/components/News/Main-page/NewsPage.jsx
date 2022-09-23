@@ -53,11 +53,7 @@ const NewsPage = (props) => {
   const capitalizeFun = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
-<<<<<<< HEAD
-
-=======
   
->>>>>>> dd7ecfee104d0cd77d5f3ce638d3abd2e4a9c12f
   return (
     <>
       <h1 className="text-info text-center main__heading">

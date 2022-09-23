@@ -41,15 +41,7 @@ const App = () => {
                 category="entertainment"
               />
             </Route>
-            <Route exact path="/general">
-              <NewsPage
-                changeProgress={setProgress}
-                key="general"
-                pageSize={15}
-                country="us"
-                category="general"
-              />
-            </Route>
+
             <Route exact path="/health">
               <NewsPage
                 changeProgress={setProgress}
